@@ -1,3 +1,4 @@
-@tailwindcss base;
-@yailwindcss components;
-@yailwindcss utilities; 
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

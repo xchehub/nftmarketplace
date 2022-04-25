@@ -7,9 +7,10 @@ async function main() {
   console.log("nftMarket deplyed to:", nftMarket.address);
 
   const NFT = await hre.ethers.getContractFactory("NFT");
-  const nft = await NFT.deploy();
+  const nft = await NFT.deploy(nftMarket.address);
   await nft.deployed();
-  console.log("bft deplyed to:", nft.address);
+  console.log("nft deplyed to:", nft.address);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

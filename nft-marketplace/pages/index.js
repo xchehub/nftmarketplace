@@ -26,9 +26,9 @@ export default function Home() {
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
 
-    const items = await Promise.all(data,map(async i => {
+    const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
-      const meta = await axios.get(tokenuri)
+      const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
         price,
@@ -48,7 +48,7 @@ export default function Home() {
   async function buyNft(nft) {
     const web3Modal = new Web3Modal()
     const connecton = await web3Modal.connect()
-    const provider = new ethers.provider.Web3Provider(connection)
+    const provider = new ethers.providers.Web3Provider(connecton)
 
     const signer = provider.getSigner()
     const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
