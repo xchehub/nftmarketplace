@@ -29,8 +29,8 @@ export default function CreateItem() {
             )
             const url = 'https://ipfs.infura.io/ipfs/${added.path}'
             setFileUrl(url)
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log('Error uploading file: ', error)
         }
     }
 
@@ -40,15 +40,13 @@ export default function CreateItem() {
 
         const data = JSON.stringify({
             name, description, image: fileUrl
-        }
-        )
-
+        })
         try {
             const added = await client.add(data)
             const url = 'https://ipfs.infura.io/ipfs/${added.path}'
             createSale(url)
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log('Error uploading file: ', error)
         }
     }
 
