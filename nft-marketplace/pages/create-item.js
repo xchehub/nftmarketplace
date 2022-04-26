@@ -24,10 +24,10 @@ export default function CreateItem() {
             const added = await client.add(
                 file,
                 {
-                    progress: (prog) => console.log('received: ${prog}')
+                    progress: (prog) => console.log(`received: ${prog}`)
                 }
             )
-            const url = 'https://ipfs.infura.io/ipfs/${added.path}'
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
             setFileUrl(url)
         } catch (error) {
             console.log('Error uploading file: ', error)
@@ -43,7 +43,7 @@ export default function CreateItem() {
         })
         try {
             const added = await client.add(data)
-            const url = 'https://ipfs.infura.io/ipfs/${added.path}'
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
             createSale(url)
         } catch (error) {
             console.log('Error uploading file: ', error)
