@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { ethers } from 'ethers'
-import { create as ipfsHttpClient } from 'ipfs-http-client'
+// import { create as ipfsHttpClient } from 'ipfs-http-client'
+import { create } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+// const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+const client = create('https://ipfs.infura.io:5001/api/v0')
 
 import {
     nftaddress, nftmarketaddress
@@ -14,19 +16,20 @@ import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 
 export default function CreateItem() {
-    const [fileUrl, setFileUrl] = useState(null)
+    const [fileUrl, setFileUrl] = useState(``)
     const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
     const router = useRouter()
 
     async function onChange(e) {
         const file = e.target.files[0]
         try {
-            const added = await client.add(
-                file,
-                {
-                    progress: (prog) => console.log(`received: ${prog}`)
-                }
-            )
+            // const added = await client.add(
+            //     file,
+            //     {
+            //         progress: (prog) => console.log(`received: ${prog}`)
+            //     }
+            // )
+            const added = await client.add(file)
             const url = `https://ipfs.infura.io/ipfs/${added.path}`
             setFileUrl(url)
         } catch (error) {
