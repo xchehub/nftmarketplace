@@ -31,7 +31,7 @@ export default function MyAssets() {
             const tokenUri = await tokenContract.tokenURI(i.tokenId)
             const meta = await axios.get(tokenUri)
             let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
-            return {
+            let item = {
                 price,
                 tokenId: i.tokenId.toNumber(),
                 seller: i.seller,
@@ -39,6 +39,7 @@ export default function MyAssets() {
                 sold: i.sold,
                 image: meta.data.image,
             }
+            return item
         }))
 
         const soldItems = items.filter(i => i.sold)
